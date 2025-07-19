@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    @media (max-width: 375px) {
+  .photo-container img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      color: #333;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Background Animation */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(-45deg, #5e094a, #1e1e2f, #182848, #4b6cb7);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      max-width: 1200px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .text-content {
+      flex: 1 1 300px;
+      min-width: 280px;
+    }
+
+    .text-content h1 {
+      font-size: 3rem;
+      margin: 0 0 15px;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    .text-content span#typed {
+      font-weight: bold;
+      font-size: 2rem;
+      border-right: 2px solid #00ff00;
+      padding-right: 5px;
+      animation: blink 1s infinite;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    }
+
+    .photo-container {
+      flex: 1 1 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 250px;
+      position: relative;
+    }
+
+    .photo-container::before {
+      content: '';
+      position: absolute;
+      width: 270px;
+      height: 270px;
+      border-radius: 50%;
+      border: 2px dashed blueviolet;
+      animation: rotate 20s linear infinite;
+    }
+
+    .photo-container img {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      border: 4px solid #00ff00;
+      box-shadow: 0 0 20px #ff00c8;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .photo-container:hover img {
+      transform: scale(1.05);
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: #00ff00; }
+    }
+
+    .typing-text {
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      display: inline-block;
+    }
+
+    .round-cursor {
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      background-color: #00ff00;
+      border-radius: 50%;
+      margin-left: 8px;
+      animation: blink 1s step-start infinite;
+      vertical-align: middle;
+      box-shadow: 0 0 10px #00ff00;
+    }
+
+    /* Skills Section */
+    .skills-section {
+      background: rgba(30, 30, 47, 0.8);
+      padding: 60px 20px;
+      color: white;
+      text-align: center;
+      position: relative;
+     
+    }
+
+    .skills-section h2 {
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .skill-box {
+      background: rgba(75, 108, 183, 0.3);
+      border-radius: 10px;
+      width: 200px;
+      height: 200px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+      opacity: 0;
+      transform: translateX(0);
+      transition: all 0.6s ease;
+      cursor: pointer;
+      box-sizing: border-box;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .skill-box.left {
+      transform: translateX(-100px);
+    }
+
+    .skill-box.right {
+      transform: translateX(100px);
+    }
+
+    .skill-box.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .skill-box:hover {
+      transform: scale(1.05);
+      background: rgba(238, 9, 121, 0.3);
+      box-shadow: 0 0 20px rgba(238, 9, 121, 0.5);
+    }
+
+    .skill-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(0, 255, 0, 0.5));
+    }
+
+    .bar {
+      background-color: rgba(51, 51, 51, 0.5);
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      width: 0;
+      transition: width 1s ease;
+      box-shadow: 0 0 10px #00c6ff;
+    }
+
+    .percent-label {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .skill-name {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    /* Projects Section */
+    .projects {
+      padding: 60px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      box-sizing: border-box;
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      border-radius: 15px;
+      position: relative;
+     
+    }
+
+    .projects-title {
+      width: 100%;
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #333;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .project-card {
+      width: 300px;
+      background: rgba(250, 250, 250, 0.95);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      cursor: default;
+      user-select: none;
+      font-size: 1.1rem;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-card a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      height: 100%;
+    }
+
+    .project-image {
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover .project-image::after {
+      opacity: 1;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.1);
+    }
+
+    .project-info {
+      padding: 20px;
+    }
+
+    .project-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .project-card:hover .project-title {
+      color: #00c6ff;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: rgba(30, 30, 47, 0.9);
+      padding: 60px 20px;
+      color: white;
+      text-align: center;
+      position: relative;
+    
+    }
+
+    .contact-section h2 {
+      margin-bottom: 30px;
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 180px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .contact-card i {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: #00ff00;
+    }
+
+    .contact-card span {
+      display: block;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,255,0,0.2);
+      background: rgba(0, 255, 0, 0.1);
+    }
+
+    /* Human verification modal */
+    .modal {
+      position: fixed;
+      top: 0; 
+      left: 0;
+      width: 100%; 
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .modal-content {
+      background: rgba(30, 30, 47, 0.95);
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      color: white;
+      box-shadow: 0 0 20px rgba(0,255,0,0.3);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      color: #00ff00;
+    }
+
+    .modal-content input {
+      width: 80%;
+      padding: 12px;
+      margin: 15px 0;
+      font-size: 16px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+      color: white;
+      border-radius: 5px;
+    }
+
+    .modal-content button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    #verify-btn {
+      background: #00ff00;
+      color: #121212;
+    }
+
+    #verify-btn:hover {
+      background: #00cc00;
+      transform: translateY(-2px);
+    }
+
+    #cancel-btn {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    #cancel-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    #puzzle-feedback {
+      margin-top: 15px;
+      color: #ff5555;
+    }
+
+    /* Enhanced Footer Styles */
+  .footer {
+    background: rgba(18, 18, 18, 0.95);
+    color: #fff;
+    padding: 50px 20px 20px;
+    position: relative;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(0, 255, 0, 0.2);
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #00ff00, transparent);
+  }
+
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+  }
+
+  .footer-section {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 30px;
+  }
+
+  .footer-section h3 {
+    color: #00ff00;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #00ff00;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+  }
+
+  .footer-links a:hover {
+    color: #00ff00;
+    transform: translateX(5px);
+  }
+
+  .footer-links i {
+    margin-right: 8px;
+    font-size: 0.8rem;
+  }
+
+  .contact-info p {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    color: #ccc;
+  }
+
+  .contact-info i {
+    margin-right: 10px;
+    color: #00ff00;
+    width: 20px;
+    text-align: center;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    text-decoration: none;
+  }
+
+  .whatsapp { background: #25D366; }
+  .instagram { background: #E1306C; }
+  .github { background: #333; }
+  .linkedin { background: #0077B5; }
+  .email { background: #EA4335; }
+
+  .social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+  }
+
+  .newsletter h4 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .newsletter-form button {
+    background: #00ff00;
+    color: #121212;
+    border: none;
+    padding: 0 15px;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .newsletter-form button:hover {
+    background: #00cc00;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-bottom p {
+    color: #888;
+    margin: 5px 0;
+  }
+
+  .footer-credits {
+    margin-top: 15px;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+    }
+    
+    .footer-section {
+      margin-bottom: 30px;
+    }
+    
+    .newsletter-form {
+      flex-direction: column;
+    }
+    
+    .newsletter-form input {
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    
+    .newsletter-form button {
+      border-radius: 5px;
+      padding: 10px;
+    }
+  }
+
+    /* Floating WhatsApp */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      padding: 15px;
+      font-size: 24px;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+      animation: pulse 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      background-color: #20b858;
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 900px) {
+      .hero-content {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .text-content h1 {
+        font-size: 2.2rem;
+        text-align: center;
+      }
+
+      .text-content span#typed {
+        font-size: 1.5rem;
+      }
+
+      .typing-text {
+        font-size: 1.7rem;
+      }
+
+      .photo-container img {
+        width: 200px;
+        height: 200px;
+      }
+
+      .photo-container::before {
+        width: 220px;
+        height: 220px;
+      }
+
+      .skills-container {
+        gap: 15px;
+      }
+
+      .skill-box {
+        width: 45vw;
+        max-width: 250px;
+        height: 180px;
+        font-size: 16px;
+      }
+
+      .skill-icon {
+        width: 50px;
+        height: 50px;
+      }
+
+      .projects {
+        padding: 40px 15px;
+        margin: 0 15px 60px;
+      }
+
+      .project-card {
+        width: 80vw;
+        max-width: 320px;
+        font-size: 1rem;
+      }
+
+      .contact-card {
+        width: 140px;
+        padding: 20px 15px;
+      }
+      
+      .contact-card i {
+        font-size: 30px;
+      }
+      
+      .contact-card span {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .text-content h1 {
+        font-size: 1.8rem;
+      }
+
+      .text-content span#typed {
+        font-size: 1.3rem;
+      }
+
+      .typing-text {
+        font-size: 1.4rem;
+      }
+
+      .photo-container img {
+        width: 150px;
+        height: 150px;
+      }
+
+      .photo-container::before {
+        width: 170px;
+        height: 170px;
+      }
+
+      .skill-box {
+        width: 90vw;
+        height: 160px;
+        font-size: 14px;
+      }
+
+      .skills-section h2 {
+        font-size: 2rem;
+      }
+
+      .project-card {
+        width: 90vw;
+        font-size: 0.95rem;
+      }
+      
+      .project-image {
+        height: 150px;
+      }
+
+      .contact-card {
+        width: 100%;
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background Animation -->
+<div id="particles-js"></div>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="text-content">
+      <h1 class="typing-text">
+        I'm <span id="typed-text"></span><span class="round-cursor"></span>
+      </h1>
+      <h1>Hello, I'm <span id="typed"></span></h1>
+    </div>
+    <div class="photo-container">
+      <img src="g.jpg" alt="My Photo" />
+    </div>
+  </div>
+</div>
+
+<!-- Skills Section -->
+<section class="skills-section" id="skills">
+  <h2>My Skills</h2>
+  <div class="skills-container">
+    <div class="skill-box left" data-fill="90%">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML" class="skill-icon">
+      <div class="skill-name">HTML</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="percent-label">90%</div>
+    </div>
+    <div class="skill-box left" data-fill="85%">
+      <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS" class="skill-icon">
+      <div class="skill-name">CSS</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="percent-label">85%</div>
+    </div>
+    <div class="skill-box right" data-fill="80%">
+      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript" class="skill-icon">
+      <div class="skill-name">JavaScript</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="percent-label">80%</div>
+    </div>
+    <div class="skill-box right" data-fill="95%">
+      <img src="https://cdn-icons-png.flaticon.com/512/6134/6134346.png" alt="ChatGPT" class="skill-icon">
+      <div class="skill-name">ChatGPT</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="percent-label">95%</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS Section -->
+<section class="skills-section" >
+  <h2>My TOOLS</h2>
+  <div class="skills-container">
+    <div class="skill-box left" data-fill="90%">
+      <img src="https://cdn-icons-png.flaticon.com/512/906/906324.png" alt="VS Code" class="skill-icon">
+      <div class="skill-name">VS CODE</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="percent-label">90%</div>
+    </div>
+    <div class="skill-box left" data-fill="85%">
+      <img src="https://cdn-icons-png.flaticon.com/512/6134/6134346.png" alt="ChatGPT" class="skill-icon">
+      <div class="skill-name">CHATGPT</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="percent-label">85%</div>
+    </div>
+    <div class="skill-box right" data-fill="80%">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" class="skill-icon">
+      <div class="skill-name">GitHub</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="percent-label">80%</div>
+    </div>
+    <div class="skill-box right" data-fill="95%">
+      <img src="https://cdn-icons-png.flaticon.com/512/6134/6134346.png" alt="DeepSeek" class="skill-icon">
+      <div class="skill-name">DEEPSEAK</div>
+      <div class="bar"><div class="fill"></div></div>
+      <div class="percent-label">95%</div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section class="projects"id="projects">
+  <h2 class="projects-title" style="color:whitesmoke;">PROJECTS</h2>
+  <div class="project-card">
+    <a href="file:///C:/Users/dhanu/OneDrive/Documents/weather.html">
+      <div class="project-image">
+        <img src="https://images.unsplash.com/photo-1580193769210-b8d1c049a7d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Weather Detection">
+      </div>
+      <div class="project-info">
+        <div class="project-title">WEATHER DETECTION Website</div>
+      </div>
+    </a>
+  </div>
+  <div class="project-card">
+    <a href="file:///C:/Users/dhanu/OneDrive/Documents/tic.html">
+      <div class="project-image">
+        <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Tic Tac Toe">
+      </div>
+      <div class="project-info">
+        <div class="project-title">TIC TAC TOE App</div>
+      </div>
+    </a>
+  </div>
+  <div class="project-card">
+    <a href="file:///C:/Users/dhanu/OneDrive/Documents/stopwatch.html">
+      <div class="project-image">
+        <img src="https://images.unsplash.com/photo-1512314889357-e157c22f938d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Stopwatch">
+      </div>
+      <div class="project-info">
+        <div class="project-title">STOP WATCH</div>
+      </div>
+    </a>
+  </div>
+  <div class="project-card">
+    <a href="C:\Users\dhanu\OneDrive\Documents\ecommerce.html">
+      <div class="project-image">
+        <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="E-commerce">
+      </div>
+      <div class="project-info">
+        <div class="project-title">E-commerce Store</div>
+      </div>
+    </a>
+  </div>
+  <div class="project-card">
+    <a href="C:\Users\dhanu\OneDrive\Documents\aibot.html">
+      <div class="project-image">
+        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="AI Chatbot">
+      </div>
+      <div class="project-info">
+        <div class="project-title">AI Chatbot</div>
+      </div>
+    </a>
+  </div>
+  <div class="project-card">
+    <a href="#">
+      <div class="project-image">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Graphic Design">
+      </div>
+      <div class="project-info">
+        <div class="project-title">Graphic Showcase</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+  <h2>Get In Touch</h2>
+  <div class="contact-container">
+    <p>Feel free to reach out to me through any of these channels</p>
+    
+    <div class="contact-cards">
+      <div class="contact-card" data-method="call">
+        <i class="fas fa-phone-alt"></i>
+        <span>Call Me</span>
+      </div>
+
+      <div class="contact-card" data-method="whatsapp">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </div>
+
+      <div class="contact-card" data-method="email">
+        <i class="fas fa-envelope"></i>
+        <span>Email</span>
+      </div>
+    </div>
+    
+    <p>Or connect with me on social media using the links below</p>
+  </div>
+</section>
+
+<!-- Human verification modal -->
+<div id="puzzle-modal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Human Verification</h2>
+    <p id="puzzle-question">Loading...</p>
+    <input type="text" id="puzzle-answer" placeholder="Your answer"/>
+    <button id="verify-btn">Verify</button>
+    <button id="cancel-btn">Cancel</button>
+    <p id="puzzle-feedback"></p>
+  </div>
+</div>
+
+<!-- Enhanced Footer Section -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+        <li><a href="#skills"><i class="fas fa-chevron-right"></i> My Skills</a></li>
+        <li><a href="#projects"><i class="fas fa-chevron-right"></i> Projects</a></li>
+        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Contact Info</h3>
+      <div class="contact-info">
+        <p><a href="https://maps.app.goo.gl/4o49hAmPXTQzQaGv7"><i class="fas fa-map-marker-alt"></i></a>Arni, Tamil Nadu, India</p>
+        <p><i class="fas fa-phone"></i> +918838043994</p>
+        <p><i class="fas fa-envelope"></i> dhanushsurya206@gmail.com</p>
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Connect With Me</h3>
+      <div class="social-icons">
+        <a href="https://wa.me/918838043994" target="_blank" class="social-icon whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-icon instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://github.com/dhanush-lang" target="_blank" class="social-icon github">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/dhanushp07" target="_blank" class="social-icon linkedin">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:dhanushsurya206@gmail.com" class="social-icon email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      
+      <div class="newsletter">
+        <h4>Subscribe to Newsletter</h4>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your Email" required>
+          <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 Dhanush. All Rights Reserved.</p>
+    <div class="footer-credits">
+      <p>Made with <i class="fas fa-heart" style="color: #ff0000;"></i> by P Dhanush</p>
+    </div>
+  </div>
+</footer>
+<!-- Floating WhatsApp -->
+<a href="https://wa.me/918838043994" class="whatsapp-float" target="_blank" rel="noopener">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- Typed.js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<!-- Particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script>
+  // Initialize particles.js
+  particlesJS("particles-js", {
+    "particles": {
+      "number": {
+        "value": 80,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": "#00ff00"
+      },
+      "shape": {
+        "type": "circle",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        },
+        "polygon": {
+          "nb_sides": 5
+        }
+      },
+      "opacity": {
+        "value": 0.5,
+        "random": false,
+        "anim": {
+          "enable": false,
+          "speed": 1,
+          "opacity_min": 0.1,
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 3,
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 40,
+          "size_min": 0.1,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 150,
+        "color": "#00ff00",
+        "opacity": 0.4,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 2,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false,
+        "attract": {
+          "enable": false,
+          "rotateX": 600,
+          "rotateY": 1200
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "grab"
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"
+        },
+        "resize": true
+      },
+      "modes": {
+        "grab": {
+          "distance": 140,
+          "line_linked": {
+            "opacity": 1
+          }
+        },
+        "bubble": {
+          "distance": 400,
+          "size": 40,
+          "duration": 2,
+          "opacity": 8,
+          "speed": 3
+        },
+        "repulse": {
+          "distance": 200,
+          "duration": 0.4
+        },
+        "push": {
+          "particles_nb": 4
+        },
+        "remove": {
+          "particles_nb": 2
+        }
+      }
+    },
+    "retina_detect": true
+  });
+
+  // Typed.js initialization
+  var typed = new Typed('#typed', {
+    strings: ["Dhanush", "Front-end Developer", "AI user", "Freelancer"],
+    typeSpeed: 50,
+    backSpeed: 25,
+    loop: true
+  });
+
+  // Manual typed effect
+  const textArray = ["have deep knowlwdge about using Artifical intilignce like CHATGPT,DEEPSEAK,PERPLEXITY OTHERS...."];
+  const typedText = document.getElementById("typed-text");
+  let textIndex = 0;
+  let charIndex = 0;
+
+  function type() {
+    if (charIndex < textArray[textIndex].length) {
+      typedText.textContent += textArray[textIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(type, 100);
+    } else {
+      setTimeout(erase, 1500);
+    }
+  }
+
+  function erase() {
+    if (charIndex > 0) {
+      typedText.textContent = textArray[textIndex].substring(0, charIndex - 1);
+      charIndex--;
+      setTimeout(erase, 50);
+    } else {
+      textIndex = (textIndex + 1) % textArray.length;
+      setTimeout(type, 500);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(type, 1000);
+
+    // Animate skills bars
+    const boxes = document.querySelectorAll('.skill-box');
+    boxes.forEach((box, index) => {
+      setTimeout(() => {
+        box.classList.add('visible');
+        const fill = box.querySelector('.fill');
+        const percent = box.getAttribute('data-fill');
+        fill.style.width = percent;
+      }, index * 300);
+    });
+  });
+
+  // Contact functionality
+  const contactCards = document.querySelectorAll('.contact-card');
+  const modal = document.getElementById('puzzle-modal');
+  const puzzleQuestion = document.getElementById('puzzle-question');
+  const puzzleAnswer = document.getElementById('puzzle-answer');
+  const verifyBtn = document.getElementById('verify-btn');
+  const cancelBtn = document.getElementById('cancel-btn');
+  const feedback = document.getElementById('puzzle-feedback');
+
+  let currentMethod = '';
+  let currentSolution = '';
+
+  const puzzles = [
+    { q: "What is 4 + 4?", a: "8" },
+    { q: "Type the word 'human'", a: "human" },
+    { q: "What color is a banana?", a: "yellow" },
+    { q: "What comes after 5?", a: "6" },
+    { q: "Spell 'contact' backwards.", a: "tcatnoc" }
+  ];
+
+  function showPuzzle(method) {
+    const puzzle = puzzles[Math.floor(Math.random() * puzzles.length)];
+    currentSolution = puzzle.a.toLowerCase();
+    puzzleQuestion.textContent = puzzle.q;
+    puzzleAnswer.value = '';
+    feedback.textContent = '';
+    modal.classList.remove('hidden');
+    currentMethod = method;
+    puzzleAnswer.focus();
+  }
+
+  contactCards.forEach(card => {
+    card.addEventListener('click', () => {
+      showPuzzle(card.dataset.method);
+    });
+  });
+
+  verifyBtn.addEventListener('click', () => {
+    const answer = puzzleAnswer.value.trim().toLowerCase();
+    if (answer === currentSolution) {
+      modal.classList.add('hidden');
+      openContactMethod(currentMethod);
+    } else {
+      feedback.textContent = "Incorrect. Please try again.";
+    }
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+
+  function openContactMethod(method) {
+    if (method === 'call') {
+      window.location.href = 'tel:+918838043994';
+    } else if (method === 'whatsapp') {
+      window.open('https://wa.me/918838043994', '_blank');
+    } else if (method === 'email') {
+      window.location.href = 'mailto:dhanushsurya206@gmail.com';
+    }
+  }
+</script>
+
+</body>
+</html>
